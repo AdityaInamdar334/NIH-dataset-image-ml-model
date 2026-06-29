@@ -22,7 +22,7 @@ An end-to-end deep learning system that combines computer vision, explainable AI
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Weights & Biases](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=weightsandbiases&logoColor=black)
 ![LangChain](https://img.shields.io/badge/LangChain-121212?style=for-the-badge)
-![License](https://img.shields.io/github/license/AdityaInamdar334/REPOSITORY_NAME?style=for-the-badge)
+![License](https://img.shields.io/github/license/AdityaInamdar334/RNIH-dataset-image-ml-model)
 
 </p>
 
@@ -1034,7 +1034,7 @@ If you use this repository in your research, please cite it.
   author = {Aditya Inamdar},
   title = {AI-Powered Medical Image Analysis Assistant},
   year = {2026},
-  url = {https://github.com/AdityaInamdar334/<repository-name>}
+  url = {https://github.com/AdityaInamdar334/NIH-dataset-image-ml-model}
 }
 ```
 
@@ -1072,7 +1072,7 @@ Machine Learning Engineer • AI Researcher • Full-Stack Developer
 
 - GitHub: https://github.com/AdityaInamdar334
 - LinkedIn: https://www.linkedin.com/in/adityainamdar1/
-- Portfolio: https://adityainamdar.com *(update if applicable)*
+- Portfolio: https://adityainamdar.com 
 
 ---
 
