@@ -28,7 +28,7 @@ An end-to-end deep learning system that combines computer vision, explainable AI
 
 ---
 
-### 🚀 Built With
+###  Built With
 
 **PyTorch • ResNet50 • FastAPI • Streamlit • Docker • Grad-CAM • LangChain • OpenAI • Weights & Biases**
 
