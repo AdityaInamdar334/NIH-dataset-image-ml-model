@@ -1,0 +1,18 @@
+torch>=2.0.0
+torchvision>=0.15.0
+pandas>=2.0.0
+numpy>=1.24.0
+Pillow>=10.0.0
+scikit-learn>=1.2.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-multipart>=0.0.6
+wandb>=0.15.0
+grad-cam>=1.4.8
+matplotlib>=3.7.0
+pydantic>=2.0.0
+streamlit>=1.25.0
+# Optional Agentic System Dependencies
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langchain-google-genai>=1.0.0

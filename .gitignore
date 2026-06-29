@@ -1,0 +1,29 @@
+# Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Datasets and Large Files
+data/
+checkpoints/
+*.pth
+*.pt
+*.onnx
+
+# Weights and Biases
+wandb/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+
+# MacOS
+.DS_Store
+
+# Output
+output/
