@@ -4,6 +4,7 @@ import base64
 import numpy as np
 import torch
 import torch.nn as nn
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from torchvision import transforms
@@ -17,31 +18,13 @@ from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 
 from data_loader import DISEASE_LABELS
 
-app = FastAPI(title="NIH Chest X-Ray AI Assistant", version="1.0.0")
-
-# Allow CORS for frontend
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Global model variables
 device = None
 model = None
 cam = None
 
-# Standard ImageNet normalization used during training
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-])
-
-@app.on_event("startup")
-def load_model():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     global device, model, cam
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
@@ -54,7 +37,10 @@ def load_model():
     checkpoint_path = os.getenv("MODEL_PATH", "./checkpoints/best_model.pth")
     if os.path.exists(checkpoint_path):
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
-        model.load_state_dict(checkpoint['model_state_dict'])
+        if 'model_state_dict' in checkpoint:
+            model.load_state_dict(checkpoint['model_state_dict'])
+        else:
+            model.load_state_dict(checkpoint)
         print("Model weights loaded successfully.")
     else:
         print("WARNING: Checkpoint not found. Using random weights for demonstration.")
@@ -65,6 +51,35 @@ def load_model():
     # Initialize Grad-CAM
     target_layers = [model.layer4[-1]]
     cam = GradCAM(model=model, target_layers=target_layers)
+    yield
+
+app = FastAPI(title="NIH Chest X-Ray AI Assistant", version="1.0.0", lifespan=lifespan)
+
+# Allow CORS for frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Standard ImageNet normalization used during training
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
+from fastapi.responses import PlainTextResponse
+
+@app.get("/")
+def read_root():
+    return {"message": "NIH Chest X-Ray AI Assistant API is running. Use /docs for documentation."}
+
+@app.get("/robots.txt", response_class=PlainTextResponse)
+def robots_txt():
+    return "User-agent: *\nDisallow: /"
 
 @app.get("/health")
 def health_check():

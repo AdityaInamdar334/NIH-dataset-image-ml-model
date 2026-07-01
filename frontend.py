@@ -5,7 +5,8 @@ from PIL import Image
 import io
 
 # FastAPI Backend URL
-API_URL = "http://localhost:8000"
+# Uncomment for local testing: API_URL = "http://localhost:8000"
+API_URL = "https://aditya1209-nih-chest-app.hf.space"
 
 st.set_page_config(page_title="AI Chest X-Ray Assistant", page_icon="🩻", layout="wide")
 

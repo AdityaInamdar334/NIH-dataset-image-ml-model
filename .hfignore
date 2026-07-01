@@ -1,0 +1,8 @@
+.venv/
+data/
+wandb/
+__pycache__/
+.git/
+.gitignore
+*.tar.gz
+checkpoints/model_epoch_*.pth

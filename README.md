@@ -1,3 +1,11 @@
+---
+title: NIH Chest X-Ray AI
+emoji: 🩻
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
 <div align="center">
 
 # 🩻 AI-Powered Medical Image Analysis Assistant
